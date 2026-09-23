@@ -1,373 +1,508 @@
-// Yayasan Binakerta Utama - Interactive JavaScript
+/**
+ * Yayasan Binakerta Utama - Main Application Module
+ * Organized into logical sections for better maintainability
+ */
 
-document.addEventListener('DOMContentLoaded', function() {
-  // Mobile Menu Toggle
-  const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-  const navLinks = document.querySelector('.nav-links');
+const App = (() => {
+  'use strict';
 
-  if (mobileMenuBtn) {
-    mobileMenuBtn.addEventListener('click', function() {
+  // Configuration
+  const CONFIG = {
+    scrollThreshold: 100,
+    revealOffset: 100,
+    counterDuration: 2000,
+    notificationTimeout: 4000,
+    parallaxMaxScroll: 600
+  };
+
+  // Cache DOM elements
+  const DOM = {};
+
+  /**
+   * Initialize cached DOM elements
+   */
+  const cacheElements = () => {
+    DOM.elements = {
+      mobileMenuBtn: document.querySelector('.mobile-menu-btn'),
+      navLinks: document.querySelector('.nav-links'),
+      header: document.querySelector('header'),
+      hero: document.querySelector('.hero'),
+      contactForm: document.querySelector('.contact-form form'),
+      donationForm: document.querySelector('.donation-form form'),
+      statNumbers: document.querySelectorAll('.stat-number'),
+      statsSection: document.querySelector('.stats-grid')
+    };
+  };
+
+  /**
+   * Mobile Menu Toggle
+   */
+  const initMobileMenu = () => {
+    const { mobileMenuBtn, navLinks } = DOM.elements;
+    
+    if (!mobileMenuBtn || !navLinks) return;
+
+    const toggleMenu = () => {
       navLinks.classList.toggle('active');
-      this.classList.toggle('active');
-    });
-  }
+      mobileMenuBtn.classList.toggle('active');
+    };
 
-  // Header Scroll Effect
-  const header = document.querySelector('header');
-  
-  window.addEventListener('scroll', function() {
-    if (window.scrollY > 100) {
-      header.classList.add('header-scrolled');
-    } else {
-      header.classList.remove('header-scrolled');
-    }
-  });
+    mobileMenuBtn.addEventListener('click', toggleMenu);
+  };
 
-  // Smooth Scrolling for Anchor Links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+  /**
+   * Header Scroll Effect
+   */
+  const initHeaderScroll = () => {
+    const { header } = DOM.elements;
+    if (!header) return;
+
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          header.classList.toggle('header-scrolled', window.scrollY > CONFIG.scrollThreshold);
+          ticking = false;
         });
+        ticking = true;
+      }
+    }, { passive: true });
+  };
+
+  /**
+   * Smooth Scrolling for Anchor Links
+   */
+  const initSmoothScroll = () => {
+    const { navLinks } = DOM.elements;
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const target = document.querySelector(targetId);
+        
+        if (!target) return;
+
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
         // Close mobile menu if open
-        navLinks.classList.remove('active');
-        if (mobileMenuBtn) {
-          mobileMenuBtn.classList.remove('active');
+        if (navLinks) navLinks.classList.remove('active');
+        if (DOM.elements.mobileMenuBtn) {
+          DOM.elements.mobileMenuBtn.classList.remove('active');
         }
-      }
-    });
-  });
-
-  // Reveal Animations on Scroll
-  const revealElements = document.querySelectorAll('.reveal');
-
-  function revealOnScroll() {
-    revealElements.forEach(element => {
-      const elementTop = element.getBoundingClientRect().top;
-      const windowHeight = window.innerHeight;
-
-      if (elementTop < windowHeight - 100) {
-        element.classList.add('active');
-      }
-    });
-  }
-
-  window.addEventListener('scroll', revealOnScroll);
-  revealOnScroll(); // Check on initial load
-
-  // Counter Animation for Stats
-  const statNumbers = document.querySelectorAll('.stat-number');
-  let animated = false;
-
-  function animateCounters() {
-    if (animated) return;
-
-    const statsSection = document.querySelector('.stats-grid');
-    if (!statsSection) return;
-
-    const sectionTop = statsSection.getBoundingClientRect().top;
-    const windowHeight = window.innerHeight;
-
-    if (sectionTop < windowHeight - 100) {
-      animated = true;
-
-      statNumbers.forEach(stat => {
-        const target = parseInt(stat.getAttribute('data-target'));
-        const duration = 2000; // 2 seconds
-        const increment = target / (duration / 16); // 60fps
-        let current = 0;
-
-        const updateCounter = () => {
-          current += increment;
-          if (current < target) {
-            stat.textContent = Math.floor(current).toLocaleString();
-            requestAnimationFrame(updateCounter);
-          } else {
-            stat.textContent = target.toLocaleString();
-          }
-        };
-
-        updateCounter();
       });
-    }
-  }
-
-  window.addEventListener('scroll', animateCounters);
-  animateCounters(); // Check on initial load
-
-  // Program Cards Click Navigation
-  const programCards = document.querySelectorAll('.program-card');
-  programCards.forEach(card => {
-    card.addEventListener('click', function() {
-      const link = this.querySelector('.program-link');
-      if (link && link.href) {
-        window.location.href = link.href;
-      }
     });
-  });
+  };
 
-  // Gallery Lightbox (Simple Implementation)
-  const galleryItems = document.querySelectorAll('.gallery-item');
-  
-  galleryItems.forEach(item => {
-    item.addEventListener('click', function() {
-      const img = this.querySelector('img');
-      const title = this.querySelector('.gallery-overlay h4');
+  /**
+   * Reveal Animations on Scroll
+   */
+  const initRevealAnimations = () => {
+    const revealElements = document.querySelectorAll('.reveal');
+    if (!revealElements.length) return;
+
+    const checkReveal = () => {
+      revealElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        
+        if (elementTop < window.innerHeight - CONFIG.revealOffset) {
+          element.classList.add('active');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', checkReveal, { passive: true });
+    checkReveal(); // Initial check
+  };
+
+  /**
+   * Counter Animation for Stats
+   */
+  const initCounterAnimation = () => {
+    const { statNumbers, statsSection } = DOM.elements;
+    if (!statNumbers.length || !statsSection) return;
+
+    let animated = false;
+
+    const animateCounter = (stat) => {
+      const target = parseInt(stat.getAttribute('data-target'), 10);
+      const increment = target / (CONFIG.counterDuration / 16);
+      let current = 0;
+
+      const updateCounter = () => {
+        current += increment;
+        if (current < target) {
+          stat.textContent = Math.floor(current).toLocaleString();
+          requestAnimationFrame(updateCounter);
+        } else {
+          stat.textContent = target.toLocaleString();
+        }
+      };
+
+      updateCounter();
+    };
+
+    const checkAndAnimate = () => {
+      if (animated) return;
+
+      const sectionTop = statsSection.getBoundingClientRect().top;
       
-      if (img && title) {
-        createLightbox(img.src, title.textContent);
+      if (sectionTop < window.innerHeight - CONFIG.revealOffset) {
+        animated = true;
+        statNumbers.forEach(animateCounter);
       }
+    };
+
+    window.addEventListener('scroll', checkAndAnimate, { passive: true });
+    checkAndAnimate(); // Initial check
+  };
+
+  /**
+   * Program Cards Click Navigation
+   */
+  const initProgramCards = () => {
+    document.querySelectorAll('.program-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const link = this.querySelector('.program-link');
+        if (link?.href) {
+          window.location.href = link.href;
+        }
+      });
     });
-  });
+  };
 
-  function createLightbox(src, title) {
-    // Remove existing lightbox if any
-    const existingLightbox = document.querySelector('.lightbox');
-    if (existingLightbox) {
-      existingLightbox.remove();
-    }
+  /**
+   * Gallery Lightbox
+   */
+  const initLightbox = () => {
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    if (!galleryItems.length) return;
 
-    const lightbox = document.createElement('div');
-    lightbox.className = 'lightbox';
-    lightbox.innerHTML = `
-      <div class="lightbox-content">
-        <span class="lightbox-close">&times;</span>
-        <img src="${src}" alt="${title}">
-        <p class="lightbox-title">${title}</p>
-      </div>
-    `;
+    const createLightbox = (src, title) => {
+      // Remove existing lightbox
+      const existingLightbox = document.querySelector('.lightbox');
+      if (existingLightbox) existingLightbox.remove();
 
-    // Add lightbox styles
-    lightbox.style.cssText = `
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-      animation: fadeIn 0.3s ease;
-    `;
+      const lightbox = document.createElement('div');
+      lightbox.className = 'lightbox';
+      lightbox.innerHTML = `
+        <div class="lightbox-content">
+          <span class="lightbox-close">&times;</span>
+          <img src="${src}" alt="${title}">
+          <p class="lightbox-title">${title}</p>
+        </div>
+      `;
 
-    const lightboxContent = lightbox.querySelector('.lightbox-content');
-    lightboxContent.style.cssText = `
-      position: relative;
-      max-width: 90%;
-      max-height: 90%;
-    `;
+      // Add styles
+      Object.assign(lightbox.style, {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        background: 'rgba(0, 0, 0, 0.9)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 2000,
+        animation: 'fadeIn 0.3s ease'
+      });
 
-    const lightboxImg = lightbox.querySelector('img');
-    lightboxImg.style.cssText = `
-      max-width: 100%;
-      max-height: 80vh;
-      border-radius: 10px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    `;
+      const lightboxContent = lightbox.querySelector('.lightbox-content');
+      Object.assign(lightboxContent.style, {
+        position: 'relative',
+        maxWidth: '90%',
+        maxHeight: '90%'
+      });
 
-    const lightboxClose = lightbox.querySelector('.lightbox-close');
-    lightboxClose.style.cssText = `
-      position: absolute;
-      top: -40px;
-      right: 0;
-      font-size: 40px;
-      color: white;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    `;
+      const lightboxImg = lightbox.querySelector('img');
+      Object.assign(lightboxImg.style, {
+        maxWidth: '100%',
+        maxHeight: '80vh',
+        borderRadius: '10px',
+        boxShadow: '0 10px 40px rgba(0, 0, 0, 0.5)'
+      });
 
-    const lightboxTitle = lightbox.querySelector('.lightbox-title');
-    lightboxTitle.style.cssText = `
-      color: white;
-      text-align: center;
-      margin-top: 15px;
-      font-size: 1.2rem;
-    `;
+      const lightboxClose = lightbox.querySelector('.lightbox-close');
+      Object.assign(lightboxClose.style, {
+        position: 'absolute',
+        top: '-40px',
+        right: 0,
+        fontSize: '40px',
+        color: 'white',
+        cursor: 'pointer',
+        transition: 'transform 0.3s ease'
+      });
 
-    // Close lightbox on click
-    lightboxClose.addEventListener('click', function() {
-      lightbox.style.animation = 'fadeIn 0.3s ease reverse';
-      setTimeout(() => lightbox.remove(), 300);
-    });
+      const lightboxTitle = lightbox.querySelector('.lightbox-title');
+      Object.assign(lightboxTitle.style, {
+        color: 'white',
+        textAlign: 'center',
+        marginTop: '15px',
+        fontSize: '1.2rem'
+      });
 
-    // Close on background click
-    lightbox.addEventListener('click', function(e) {
-      if (e.target === lightbox) {
+      const closeLightbox = () => {
         lightbox.style.animation = 'fadeIn 0.3s ease reverse';
         setTimeout(() => lightbox.remove(), 300);
-      }
+      };
+
+      lightboxClose.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      document.body.appendChild(lightbox);
+    };
+
+    galleryItems.forEach(item => {
+      item.addEventListener('click', function() {
+        const img = this.querySelector('img');
+        const title = this.querySelector('.gallery-overlay h4');
+        
+        if (img && title) {
+          createLightbox(img.src, title.textContent);
+        }
+      });
     });
+  };
 
-    document.body.appendChild(lightbox);
-  }
+  /**
+   * Notification System
+   */
+  const showNotification = (message, type = 'info') => {
+    // Remove existing notification
+    const existing = document.querySelector('.notification');
+    if (existing) existing.remove();
 
-  // Form Submission Handler
-  const contactForm = document.querySelector('.contact-form form');
-  
-  if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // Get form data
-      const formData = new FormData(this);
-      const data = Object.fromEntries(formData);
-      
-      // Simple validation
-      if (!data.name || !data.email || !data.message) {
-        showNotification('Please fill in all required fields', 'error');
-        return;
-      }
-
-      // Simulate form submission
-      const submitBtn = this.querySelector('button[type="submit"]');
-      const originalText = submitBtn.textContent;
-      submitBtn.textContent = 'Sending...';
-      submitBtn.disabled = true;
-
-      setTimeout(() => {
-        showNotification('Thank you! Your message has been sent successfully.', 'success');
-        this.reset();
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-      }, 1500);
-    });
-  }
-
-  // Donation Form Handler
-  const donationForm = document.querySelector('.donation-form form');
-  
-  if (donationForm) {
-    donationForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const formData = new FormData(this);
-      const data = Object.fromEntries(formData);
-      
-      if (!data.amount || !data.donorName || !data.email) {
-        showNotification('Please fill in all required fields', 'error');
-        return;
-      }
-
-      const submitBtn = this.querySelector('button[type="submit"]');
-      const originalText = submitBtn.textContent;
-      submitBtn.textContent = 'Processing...';
-      submitBtn.disabled = true;
-
-      setTimeout(() => {
-        showNotification(`Thank you for your generous donation of Rp ${data.amount}!`, 'success');
-        this.reset();
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-      }, 2000);
-    });
-  }
-
-  // Notification System
-  function showNotification(message, type = 'info') {
-    const existingNotification = document.querySelector('.notification');
-    if (existingNotification) {
-      existingNotification.remove();
-    }
+    const colors = {
+      success: '#A8D5BA',
+      error: '#E8B4B8',
+      info: '#F4E8D8'
+    };
 
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.textContent = message;
     
-    notification.style.cssText = `
-      position: fixed;
-      top: 100px;
-      right: 20px;
-      background: ${type === 'success' ? '#A8D5BA' : type === 'error' ? '#E8B4B8' : '#F4E8D8'};
-      color: #4A4A4A;
-      padding: 15px 25px;
-      border-radius: 10px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-      z-index: 3000;
-      animation: slideInRight 0.3s ease;
-      font-weight: 600;
-    `;
+    Object.assign(notification.style, {
+      position: 'fixed',
+      top: '100px',
+      right: '20px',
+      background: colors[type] || colors.info,
+      color: '#4A4A4A',
+      padding: '15px 25px',
+      borderRadius: '10px',
+      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+      zIndex: 3000,
+      animation: 'slideInRight 0.3s ease',
+      fontWeight: '600'
+    });
 
     document.body.appendChild(notification);
 
     setTimeout(() => {
       notification.style.animation = 'slideInRight 0.3s ease reverse';
       setTimeout(() => notification.remove(), 300);
-    }, 4000);
-  }
+    }, CONFIG.notificationTimeout);
+  };
 
-  // Add keyframe animations for notifications
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes slideInRight {
-      from {
-        opacity: 0;
-        transform: translateX(100px);
+  /**
+   * Form Handler (Generic)
+   */
+  const initFormHandler = (formSelector, validateFn, successMessage) => {
+    const form = document.querySelector(formSelector);
+    if (!form) return;
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData);
+      
+      // Validate
+      if (!validateFn(data)) {
+        showNotification('Please fill in all required fields', 'error');
+        return;
       }
-      to {
-        opacity: 1;
-        transform: translateX(0);
+
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const originalText = submitBtn?.textContent || '';
+      
+      // Set loading state
+      if (submitBtn) {
+        submitBtn.textContent = 'Processing...';
+        submitBtn.disabled = true;
       }
-    }
-  `;
-  document.head.appendChild(style);
 
-  // Active Navigation Link
-  const currentPage = window.location.pathname;
-  const navLinksList = document.querySelectorAll('.nav-links a');
-  
-  navLinksList.forEach(link => {
-    if (link.getAttribute('href') === currentPage || 
-        (currentPage.includes(link.getAttribute('href')) && link.getAttribute('href') !== '/')) {
-      link.classList.add('active');
-    }
-  });
-
-  // Parallax Effect for Hero Section
-  const hero = document.querySelector('.hero');
-  
-  if (hero) {
-    window.addEventListener('scroll', function() {
-      const scrolled = window.scrollY;
-      if (scrolled < 600) {
-        hero.style.backgroundPositionY = `${scrolled * 0.5}px`;
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      showNotification(successMessage(data), 'success');
+      this.reset();
+      
+      if (submitBtn) {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
       }
     });
-  }
+  };
 
-  // Team Member Hover Effect Enhancement
-  const teamMembers = document.querySelectorAll('.team-member');
-  
-  teamMembers.forEach(member => {
-    member.addEventListener('mouseenter', function() {
-      this.style.transform = 'translateY(-10px) scale(1.02)';
-    });
+  /**
+   * Initialize Contact Form
+   */
+  const initContactForm = () => {
+    initFormHandler(
+      '.contact-form form',
+      (data) => data.name && data.email && data.message,
+      () => 'Thank you! Your message has been sent successfully.'
+    );
+  };
+
+  /**
+   * Initialize Donation Form
+   */
+  const initDonationForm = () => {
+    initFormHandler(
+      '.donation-form form',
+      (data) => data.amount && data.donorName && data.email,
+      (data) => `Thank you for your generous donation of Rp ${data.amount}!`
+    );
+  };
+
+  /**
+   * Active Navigation Link
+   */
+  const initActiveNavigation = () => {
+    const currentPage = window.location.pathname;
     
-    member.addEventListener('mouseleave', function() {
-      this.style.transform = 'translateY(0) scale(1)';
-    });
-  });
-
-  // Lazy Loading Images
-  const images = document.querySelectorAll('img[data-src]');
-  
-  const imageObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const img = entry.target;
-        img.src = img.dataset.src;
-        img.removeAttribute('data-src');
-        observer.unobserve(img);
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === currentPage || 
+          (currentPage.includes(href) && href !== '/')) {
+        link.classList.add('active');
       }
     });
-  });
+  };
 
-  images.forEach(img => imageObserver.observe(img));
+  /**
+   * Parallax Effect for Hero Section
+   */
+  const initParallax = () => {
+    const { hero } = DOM.elements;
+    if (!hero) return;
 
-  console.log('Yayasan Binakerta Utama - Website Loaded Successfully!');
-});
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrolled = window.scrollY;
+          if (scrolled < CONFIG.parallaxMaxScroll) {
+            hero.style.backgroundPositionY = `${scrolled * 0.5}px`;
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  };
+
+  /**
+   * Team Member Hover Effects
+   */
+  const initTeamHoverEffects = () => {
+    document.querySelectorAll('.team-member').forEach(member => {
+      member.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-10px) scale(1.02)';
+      });
+      
+      member.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+  };
+
+  /**
+   * Lazy Loading Images
+   */
+  const initLazyLoading = () => {
+    const images = document.querySelectorAll('img[data-src]');
+    if (!images.length) return;
+    
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.removeAttribute('data-src');
+          observer.unobserve(img);
+        }
+      });
+    });
+
+    images.forEach(img => imageObserver.observe(img));
+  };
+
+  /**
+   * Add Notification Animation Styles
+   */
+  const addAnimationStyles = () => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(100px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  };
+
+  /**
+   * Log initialization
+   */
+  const logInitialization = () => {
+    console.log('Yayasan Binakerta Utama - Website Loaded Successfully!');
+  };
+
+  /**
+   * Initialize all modules
+   */
+  const init = () => {
+    cacheElements();
+    addAnimationStyles();
+    
+    initMobileMenu();
+    initHeaderScroll();
+    initSmoothScroll();
+    initRevealAnimations();
+    initCounterAnimation();
+    initProgramCards();
+    initLightbox();
+    initContactForm();
+    initDonationForm();
+    initActiveNavigation();
+    initParallax();
+    initTeamHoverEffects();
+    initLazyLoading();
+    
+    logInitialization();
+  };
+
+  // Public API
+  return {
+    init,
+    showNotification
+  };
+})();
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', App.init);
