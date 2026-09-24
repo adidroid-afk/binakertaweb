@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yayasan Bina Kerta Utama — Pendidikan &amp; Sosial | TK Bina Harapan</title>
+<meta name="description" content="Yayasan Bina Kerta Utama bergerak dalam bidang Pendidikan dan Sosial, berdiri tahun 1979, membina 4 unit Taman Kanak-Kanak Bina Harapan di Jakarta, Depok, dan Bekasi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0f2d4a;
+    --navy-dark:#0a2036;
+    --teal:#0e7c7b;
+    --gold:#e0a63c;
+    --gold-dark:#c1892a;
+    --cream:#fdf9f2;
+    --paper:#ffffff;
+    --ink:#22303c;
+    --muted:#5c6b78;
+    --line:#e8e0d3;
+    --radius:16px;
+    --shadow:0 10px 30px rgba(15,45,74,.08);
+    --shadow-lg:0 20px 50px rgba(15,45,74,.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--cream);line-height:1.65;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  ul{list-style:none}
+  h1,h2,h3,h4{font-family:'Lora',Georgia,serif;line-height:1.25;color:var(--navy)}
+  .container{width:min(1140px,92%);margin-inline:auto}
+  section{padding:84px 0}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+  .eyebrow::before{content:"";width:26px;height:3px;border-radius:3px;background:var(--gold)}
+  .section-title{font-size:clamp(1.7rem,3.4vw,2.4rem);margin-bottom:14px}
+  .section-lead{max-width:680px;color:var(--muted);font-size:1.02rem}
+  .center{text-align:center}
+  .center .section-lead{margin-inline:auto}
+  .btn{display:inline-block;padding:14px 30px;border-radius:999px;font-weight:700;font-size:.95rem;transition:.25s;border:2px solid transparent;cursor:pointer}
+  .btn-gold{background:var(--gold);color:var(--navy-dark)}
+  .btn-gold:hover{background:var(--gold-dark);transform:translateY(-2px)}
+  .btn-outline{border-color:rgba(255,255,255,.6);color:#fff}
+  .btn-outline:hover{background:rgba(255,255,255,.12)}
+  .btn-teal{background:var(--teal);color:#fff}
+  .btn-teal:hover{filter:brightness(1.1);transform:translateY(-2px)}
+
+  /* ===== Header ===== */
+  header{position:sticky;top:0;z-index:50;background:rgba(253,249,242,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 0}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--navy)}
+  .brand .mark{width:44px;height:44px;flex:none;border-radius:50%;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-family:'Lora',serif;font-size:.95rem;font-weight:700;border:2px solid var(--gold)}
+  .brand small{display:block;font-weight:600;font-size:.68rem;color:var(--teal);letter-spacing:.08em;text-transform:uppercase}
+  .brand span.txt{font-size:1.02rem;line-height:1.2}
+  .menu{display:flex;align-items:center;gap:26px;font-size:.92rem;font-weight:600}
+  .menu a{color:var(--navy);opacity:.85;transition:.2s}
+  .menu a:hover{opacity:1;color:var(--teal)}
+  .menu .btn{padding:11px 22px}
+  .burger{display:none;background:none;border:0;cursor:pointer;width:42px;height:42px;border-radius:10px}
+  .burger span{display:block;width:22px;height:2px;background:var(--navy);margin:5px auto;border-radius:2px}
+
+  /* ===== Hero ===== */
+  .hero{position:relative;color:#eaf1f7;background:
+      radial-gradient(900px 420px at 85% -10%, rgba(224,166,60,.28), transparent 60%),
+      radial-gradient(700px 380px at 5% 110%, rgba(14,124,123,.45), transparent 60%),
+      linear-gradient(150deg,var(--navy-dark) 0%,var(--navy) 55%,#123a5e 100%);
+      padding:96px 0 120px;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;position:relative;z-index:2}
+  .hero h1{color:#fff;font-size:clamp(2.1rem,4.6vw,3.3rem);margin-bottom:20px}
+  .hero h1 em{font-style:normal;color:var(--gold)}
+  .hero p{color:rgba(234,241,247,.88);font-size:1.06rem;max-width:560px;margin-bottom:30px}
+  .hero .badge{display:inline-block;border:1px solid rgba(224,166,60,.6);color:var(--gold);border-radius:999px;padding:7px 16px;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:22px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .hero-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:30px;backdrop-filter:blur(6px)}
+  .hero-card h3{color:#fff;font-size:1.15rem;margin-bottom:6px}
+  .hero-card p{font-size:.92rem;margin-bottom:18px}
+  .hero-list li{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-top:1px dashed rgba(255,255,255,.18);font-size:.93rem;color:rgba(234,241,247,.92)}
+  .hero-list li:first-child{border-top:0}
+  .dot{flex:none;width:22px;height:22px;border-radius:50%;background:var(--gold);color:var(--navy-dark);font-size:.72rem;font-weight:800;display:grid;place-items:center;margin-top:2px}
+
+  /* ===== Stats ===== */
+  .stats{margin-top:-64px;position:relative;z-index:5}
+  .stats-inner{display:grid;grid-template-columns:repeat(4,1fr);background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow-lg);padding:30px 20px;gap:10px}
+  .stat{text-align:center;padding:6px 12px;border-right:1px solid var(--line)}
+  .stat:last-child{border-right:0}
+  .stat b{display:block;font-family:'Lora',serif;font-size:2rem;color:var(--teal)}
+  .stat span{font-size:.82rem;color:var(--muted);font-weight:600}
+
+  /* ===== About ===== */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  .vmt{display:grid;gap:18px}
+  .vmt-item{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:12px;padding:22px 24px;box-shadow:var(--shadow)}
+  .vmt-item:nth-child(2){border-left-color:var(--teal)}
+  .vmt-item h3{font-size:1.05rem;margin-bottom:10px}
+  .vmt-item ul{list-style:disc;padding-left:20px;color:var(--muted);font-size:.95rem}
+  .vmt-item li{margin-bottom:6px}
+  .vmt-item li:last-child{margin-bottom:0}
+  .about-text p{color:var(--muted);margin-bottom:16px}
+  .about-text p strong{color:var(--navy)}
+  .pengurus{margin-top:26px;background:var(--navy);color:#e8eff5;border-radius:var(--radius);padding:26px 28px}
+  .pengurus h3{color:#fff;font-size:1.05rem;margin-bottom:14px}
+  .pengurus h4{color:var(--gold);font-family:'Plus Jakarta Sans',sans-serif;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;margin:16px 0 8px}
+  .pengurus h4:first-of-type{margin-top:0}
+  .pengurus li{display:flex;justify-content:space-between;gap:16px;font-size:.9rem;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,.14)}
+  .pengurus li:last-child{border-bottom:0}
+  .pengurus li b{font-weight:600;color:#fff;text-align:right}
+
+  /* ===== Timeline ===== */
+  .timeline-sec{background:var(--paper)}
+  .timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:44px;position:relative}
+  .timeline::before{content:"";position:absolute;top:26px;left:6%;right:6%;height:2px;background:linear-gradient(90deg,var(--gold),var(--teal))}
+  .tl{position:relative;text-align:center}
+  .tl .year{width:54px;height:54px;margin:0 auto 16px;border-radius:50%;background:var(--cream);border:2px solid var(--gold);display:grid;place-items:center;font-family:'Lora',serif;font-weight:700;color:var(--navy);position:relative;z-index:2;font-size:.98rem}
+  .tl h4{font-family:'Plus Jakarta Sans',sans-serif;font-size:.95rem;margin-bottom:4px}
+  .tl p{font-size:.83rem;color:var(--muted)}
+
+  /* ===== Schools ===== */
+  .schools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:44px}
+  .school{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);transition:.25s}
+  .school:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  .school .tag{display:inline-block;background:rgba(14,124,123,.1);color:var(--teal);font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border-radius:999px;padding:5px 12px;margin-bottom:12px}
+  .school h3{font-size:1.2rem;margin-bottom:6px}
+  .school .meta{font-size:.85rem;color:var(--muted);margin-bottom:14px}
+  .school .meta b{color:var(--navy)}
+  .school .visi{font-family:'Lora',serif;font-style:italic;color:var(--navy);border-left:3px solid var(--gold);padding-left:12px;font-size:.93rem;margin-bottom:12px}
+  .school ul{list-style:disc;padding-left:20px;font-size:.88rem;color:var(--muted)}
+  .school li{margin-bottom:5px}
+  .school li b{color:var(--navy)}
+
+  /* ===== Values ===== */
+  .values-sec{background:linear-gradient(160deg,var(--navy-dark),#123a5e);color:#e9f0f6}
+  .values-sec .section-title,.values-sec h3{color:#fff}
+  .values-sec .section-lead{color:rgba(233,240,246,.75)}
+  .values-sec .eyebrow{color:var(--gold)}
+  .values{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:44px}
+  .value{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);padding:26px 22px}
+  .value .ico{width:46px;height:46px;border-radius:12px;background:var(--gold);color:var(--navy-dark);display:grid;place-items:center;font-size:1.25rem;margin-bottom:16px}
+  .value h3{font-size:1.08rem;margin-bottom:10px}
+  .value>p{font-size:.86rem;color:rgba(233,240,246,.78);margin-bottom:12px}
+  .value li{font-size:.84rem;padding:5px 0 5px 18px;position:relative;color:rgba(233,240,246,.9)}
+  .value li::before{content:"◆";position:absolute;left:0;color:var(--gold);font-size:.6rem;top:10px}
+  .value li b{color:#fff}
+
+  /* ===== Programs ===== */
+  .prog-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:44px}
+  .prog{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
+  .prog h3{font-size:1.15rem;margin-bottom:6px}
+  .prog .sub{font-size:.82rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+  .prog p.desc{font-size:.9rem;color:var(--muted);margin-bottom:14px}
+  .prog p.desc b{color:var(--navy)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{background:rgba(224,166,60,.14);border:1px solid rgba(193,137,42,.3);color:#8a6414;border-radius:999px;padding:6px 13px;font-size:.8rem;font-weight:600}
+  .prog ul.plain{list-style:disc;padding-left:20px;font-size:.9rem;color:var(--muted)}
+  .prog ul.plain li{margin-bottom:7px}
+  .prog ul.plain b{color:var(--navy)}
+
+  /* ===== Ekstrakurikuler / Fasilitas ===== */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:44px}
+  .panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow)}
+  .panel h3{font-size:1.2rem;margin-bottom:16px}
+  .panel article{padding:14px 0;border-top:1px dashed var(--line)}
+  .panel article:first-of-type{border-top:0;padding-top:0}
+  .panel h4{font-family:'Plus Jakarta Sans',sans-serif;font-size:.98rem;color:var(--teal);margin-bottom:6px}
+  .panel p,.panel li{font-size:.88rem;color:var(--muted)}
+  .num-list{counter-reset:n}
+  .num-list li{counter-increment:n;list-style:none;display:flex;gap:12px;padding:9px 0;font-size:.9rem;color:var(--muted)}
+  .num-list li::before{content:counter(n);flex:none;width:24px;height:24px;border-radius:50%;background:var(--navy);color:var(--gold);font-size:.74rem;font-weight:800;display:grid;place-items:center;margin-top:2px}
+  .num-list b{color:var(--navy)}
+
+  /* ===== News & Prestasi ===== */
+  .news-sec{background:var(--paper)}
+  .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+  .card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--cream);display:flex;flex-direction:column;transition:.25s}
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  .thumb{aspect-ratio:16/10;display:grid;place-items:center;color:#fff;font-family:'Lora',serif;font-size:1.05rem;text-align:center;padding:16px}
+  .t1{background:linear-gradient(135deg,#0e7c7b,#12a594)}
+  .t2{background:linear-gradient(135deg,#0f2d4a,#2a6fa8)}
+  .t3{background:linear-gradient(135deg,#c1892a,#e0a63c)}
+  .t4{background:linear-gradient(135deg,#7a3b5e,#b06a90)}
+  .card-body{padding:20px 22px 24px}
+  .kicker{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+  .card h3{font-size:1.02rem;margin-bottom:8px}
+  .card p{font-size:.87rem;color:var(--muted)}
+  .prestasi{margin-top:44px;background:linear-gradient(120deg,rgba(224,166,60,.14),rgba(14,124,123,.1));border:1px solid rgba(193,137,42,.3);border-radius:var(--radius);padding:28px}
+  .prestasi h3{font-size:1.15rem;margin-bottom:8px}
+  .prestasi p{color:var(--muted);font-size:.92rem}
+
+  /* ===== Testimoni ===== */
+  .testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:44px}
+  .testi{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);position:relative}
+  .testi::before{content:"“";position:absolute;top:6px;right:20px;font-family:'Lora',serif;font-size:4rem;color:rgba(224,166,60,.35);line-height:1}
+  .testi p{font-size:.92rem;color:var(--muted);margin-bottom:18px}
+  .who{display:flex;align-items:center;gap:12px}
+  .ava{width:44px;height:44px;border-radius:50%;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-weight:800;font-family:'Lora',serif}
+  .who b{display:block;font-size:.92rem;color:var(--navy)}
+  .who span{font-size:.8rem;color:var(--teal);font-weight:600}
+
+  /* ===== Galeri ===== */
+  .gallery-sec{background:var(--paper)}
+  .gal{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px}
+  .g-item{aspect-ratio:4/3;border-radius:14px;display:flex;align-items:flex-end;padding:16px;color:#fff;font-weight:700;font-size:.9rem;min-height:120px;transition:.25s}
+  .g-item:hover{transform:scale(1.02)}
+  .g1{background:linear-gradient(160deg,#8e3b6b,#c96ba0)}
+  .g2{background:linear-gradient(160deg,#0e7c7b,#3fbfa2)}
+  .g3{background:linear-gradient(160deg,#2a6fa8,#6fb1e0)}
+  .g4{background:linear-gradient(160deg,#b3541e,#e0913c)}
+  .g5{background:linear-gradient(160deg,#0f2d4a,#3f7ca8)}
+  .g6{background:linear-gradient(160deg,#7a5c1e,#d8b45a)}
+  .g7{background:linear-gradient(160deg,#4d3b8e,#8f7ad1)}
+  .g8{background:linear-gradient(160deg,#1e6b46,#54b57f)}
+  .gal-note{margin-top:18px;font-size:.85rem;color:var(--muted);font-style:italic}
+
+  /* ===== PPDB ===== */
+  .ppdb-sec{background:linear-gradient(150deg,var(--navy-dark),#123a5e);color:#e9f0f6}
+  .ppdb-sec .section-title{color:#fff}
+  .ppdb-sec .eyebrow{color:var(--gold)}
+  .ppdb-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;margin-top:36px;align-items:start}
+  .ppdb-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius);padding:28px}
+  .ppdb-card h3{color:#fff;font-size:1.1rem;margin-bottom:14px}
+  .ppdb-card p,.ppdb-card li{font-size:.92rem;color:rgba(233,240,246,.85)}
+  .ppdb-card ul{list-style:disc;padding-left:20px;margin-top:8px}
+  .ppdb-card li{margin-bottom:6px}
+  .ppdb-card h4{color:var(--gold);font-family:'Plus Jakarta Sans',sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;margin:18px 0 6px}
+  .ppdb-card h4:first-child{margin-top:0}
+  .ppdb-sec .lead-p{color:rgba(233,240,246,.85);max-width:640px}
+
+  /* ===== Kontak ===== */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:44px;align-items:start}
+  .contact-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow)}
+  .contact-card h3{margin-bottom:18px;font-size:1.2rem}
+  .c-row{display:flex;gap:16px;padding:14px 0;border-top:1px dashed var(--line)}
+  .c-row:first-of-type{border-top:0;padding-top:0}
+  .c-ico{flex:none;width:44px;height:44px;border-radius:12px;background:rgba(14,124,123,.12);color:var(--teal);display:grid;place-items:center;font-size:1.15rem}
+  .c-row b{display:block;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .c-row span,.c-row a{font-size:.95rem;color:var(--navy);font-weight:600}
+  .map-frame{width:100%;height:100%;min-height:380px;border:0;border-radius:var(--radius);box-shadow:var(--shadow)}
+  .unit-list{margin-top:26px;display:grid;gap:10px}
+  .unit-list div{background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:12px 16px;font-size:.88rem;color:var(--muted)}
+  .unit-list b{color:var(--navy)}
+
+  /* ===== Footer ===== */
+  footer{background:var(--navy-dark);color:rgba(233,240,246,.72);padding:64px 0 0}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:44px}
+  footer h4{color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px}
+  footer .f-brand{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  footer .f-brand .mark{width:44px;height:44px;border-radius:50%;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-family:'Lora',serif;font-weight:700;border:2px solid var(--gold)}
+  footer .f-brand b{color:#fff;font-size:1.05rem}
+  footer p{font-size:.9rem}
+  footer nav a{display:block;padding:6px 0;font-size:.9rem;transition:.2s}
+  footer nav a:hover{color:var(--gold)}
+  .copy{border-top:1px solid rgba(255,255,255,.12);padding:22px 0;font-size:.82rem;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  .wa-float{position:fixed;right:22px;bottom:22px;z-index:60;background:#25d366;color:#fff;border-radius:999px;padding:14px 22px;font-weight:700;font-size:.9rem;box-shadow:0 12px 28px rgba(0,0,0,.25);display:flex;align-items:center;gap:9px}
+  .wa-float:hover{filter:brightness(1.06)}
+
+  @media(max-width:960px){
+    .hero-grid,.about-grid,.prog-grid,.two-col,.contact-grid,.ppdb-grid{grid-template-columns:1fr}
+    .stats-inner{grid-template-columns:repeat(2,1fr);gap:18px 0}
+    .stat:nth-child(2){border-right:0}
+    .timeline{grid-template-columns:repeat(2,1fr)}
+    .timeline::before{display:none}
+    .values{grid-template-columns:1fr 1fr}
+    .news-grid,.testi-grid{grid-template-columns:1fr 1fr}
+    .schools-grid{grid-template-columns:1fr}
+    .gal{grid-template-columns:repeat(2,1fr)}
+    .foot-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:640px){
+    section{padding:64px 0}
+    .menu{position:absolute;top:100%;left:0;right:0;background:var(--paper);flex-direction:column;align-items:stretch;padding:18px 6%;gap:4px;border-bottom:1px solid var(--line);display:none;box-shadow:var(--shadow-lg)}
+    .menu.open{display:flex}
+    .menu a{padding:12px 0}
+    .menu .btn{text-align:center;margin-top:8px}
+    .burger{display:block}
+    .values,.news-grid,.testi-grid,.gal,.foot-grid{grid-template-columns:1fr}
+    .stats{margin-top:-40px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="#beranda">
+      <span class="mark">YBU</span>
+      <span class="txt">Yayasan Bina Kerta Utama<small>Pendidikan &amp; Sosial</small></span>
+    </a>
+    <button class="burger" aria-label="Buka menu"><span></span><span></span><span></span></button>
+    <nav class="menu" id="menu">
+      <a href="#tentang">Tentang</a>
+      <a href="#sekolah">Sekolah</a>
+      <a href="#nilai">Nilai-Nilai</a>
+      <a href="#program">Program</a>
+      <a href="#berita">Berita</a>
+      <a href="#galeri">Galeri</a>
+      <a href="#kontak">Kontak</a>
+      <a href="#ppdb" class="btn btn-teal">PPDB</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="beranda">
+  <div class="container hero-grid">
+    <div>
+      <span class="badge">Berdiri sejak 1979</span>
+      <h1>Mewujudkan generasi bangsa yang <em>unggul, cerdas, berkarakter</em> dan berakhlak mulia</h1>
+      <p>Yayasan Bina Kerta Utama bergerak dalam bidang Pendidikan dan Sosial. Pada saat ini telah memiliki 4 cabang yang berlokasi di Jakarta, Depok, &amp; Bekasi. Hal ini bertujuan untuk membantu pemerintah dalam mewujudkan generasi bangsa yang unggul, cerdas, kreatif dan berakhlak mulia serta terus meningkatkan mutu pelayanan baik dalam pembelajaran, pengajar dan fasilitas.</p>
+      <div class="hero-cta">
+        <a href="#ppdb" class="btn btn-gold">Pendaftaran Baru (PPDB)</a>
+        <a href="#tentang" class="btn btn-outline">Tentang Kami</a>
+      </div>
+    </div>
+    <aside class="hero-card">
+      <h3>Layanan Yayasan</h3>
+      <p>Bidang garapan utama Yayasan Bina Kerta Utama:</p>
+      <ul class="hero-list">
+        <li><span class="dot">P</span> Pendidikan — 4 unit Taman Kanak-Kanak Bina Harapan I–IV</li>
+        <li><span class="dot">S</span> Sosial — Training, Charity, dan Kantor Bantuan Hukum (KBH)</li>
+        <li><span class="dot">N</span> Nilai unggulan — Integritas · Kreatif · Berkarakter · Berakhlak Mulia</li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<!-- ================= STATS ================= -->
+<div class="stats">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stat"><b>1979</b><span>Tahun Berdiri</span></div>
+      <div class="stat"><b>4</b><span>Unit Sekolah (TK Bina Harapan)</span></div>
+      <div class="stat"><b>3</b><span>Kota: Jakarta, Depok &amp; Bekasi</span></div>
+      <div class="stat"><b>45+</b><span>Tahun Mengabdi di Bidang Pendidikan</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= TENTANG ================= -->
+<section id="tentang">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <span class="eyebrow">Tentang Kami</span>
+        <h2 class="section-title">Sejarah &amp; Profil Yayasan</h2>
+        <p>Taman Kanak-Kanak Bina Harapan berada di bawah naungan Yayasan Bina Kerta Utama. Didirikan pada tahun <strong>1979</strong> oleh Alm. Bpk. <strong>H. Achmadi Supriyanto</strong> dan Ibu. <strong>Hj. Wadjiah</strong>. Yayasan bergerak dalam bidang Pendidikan dan Sosial.</p>
+        <p>Pada saat ini telah memiliki <strong>4 cabang</strong> yang berlokasi di Jakarta, Depok, &amp; Bekasi. Hal ini bertujuan untuk membantu pemerintah dalam mewujudkan generasi bangsa yang unggul, cerdas, kreatif dan berakhlak mulia serta terus meningkatkan mutu pelayanan baik dalam pembelajaran, pengajar dan fasilitas.</p>
+        <div class="pengurus">
+          <h3>Pengurus Yayasan</h3>
+          <h4>Pembina</h4>
+          <ul>
+            <li>Ketua <b>Hj. Wadjiah</b></li>
+            <li>Anggota <b>H. Trias Adijaya, S.T., M.T.</b></li>
+          </ul>
+          <h4>Pengurus</h4>
+          <ul>
+            <li>Ketua <b>Pratami Widyarina, S.Pd.I</b></li>
+            <li>Sekretaris <b>H. Rizka Sasongko Aji, S.I.Kom</b></li>
+            <li>Bendahara <b>Djalu Dwi Atmodjo, SE</b></li>
+            <li>Pengawas <b>Rake Irianto Mahendrata, S.T., M.T.</b></li>
+          </ul>
+        </div>
+      </div>
+      <div class="vmt">
+        <div class="vmt-item">
+          <h3>Visi</h3>
+          <ul>
+            <li>Mewujudkan generasi bangsa yang unggul, cerdas, berkarakter dan berakhlak mulia.</li>
+            <li>Berpartisipasi aktif dalam pemberdayaan edukasi dan sosial masyarakat.</li>
+          </ul>
+        </div>
+        <div class="vmt-item">
+          <h3>Misi</h3>
+          <ul>
+            <li>Mengembangkan pembelajaran yang kreatif, inovatif dan bermoral berdasarkan kurikulum yang diberlakukan oleh pemerintah.</li>
+            <li>Menciptakan suasana belajar yang menarik, menyenangkan, aman dan nyaman.</li>
+            <li>Memberikan pembekalan anak didik agar siap memasuki jenjang pendidikan sekolah dasar.</li>
+          </ul>
+        </div>
+        <div class="vmt-item">
+          <h3>Tujuan</h3>
+          <ul>
+            <li>Anak didik memiliki kematangan sosial, kognitif, fisik motorik serta kecakapan hidup sesuai dengan perkembangannya dalam kesiapan memasuki pendidikan sekolah dasar.</li>
+            <li>Kemampuan anak didik untuk mengembangkan sikap mandiri dan percaya diri.</li>
+            <li>Mengembangkan potensi anak didik secara spiritual, intelektual, empati dan sosial.</li>
+            <li>Partisipasi orang tua dalam pelaksanaan program-program sekolah.</li>
+            <li>Guru memiliki profesionalitas dalam pelaksanaan kurikulum yang berlaku.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TIMELINE ================= -->
+<section class="timeline-sec">
+  <div class="container center">
+    <span class="eyebrow">Catatan Tahunan Yayasan Bina Kerta Utama</span>
+    <h2 class="section-title">Perjalanan Kami</h2>
+    <div class="timeline">
+      <div class="tl"><div class="year">1979</div><h4>Berdiri</h4><p>Tahun berdirinya Yayasan Bina Kerta Utama</p></div>
+      <div class="tl"><div class="year">1979</div><h4>Jakarta Selatan</h4><p>Bersamaan berdirinya yayasan dan TK Bina Harapan I</p></div>
+      <div class="tl"><div class="year">1980</div><h4>Kota Bekasi</h4><p>Tahun berdirinya unit TK Bina Harapan II</p></div>
+      <div class="tl"><div class="year">2000</div><h4>Cinere – Depok</h4><p>Tahun berdirinya unit TK Bina Harapan III</p></div>
+      <div class="tl"><div class="year">2003</div><h4>Grogol – Depok</h4><p>Tahun berdirinya unit TK Bina Harapan IV</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SEKOLAH ================= -->
+<section id="sekolah">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Sekolah</span>
+      <h2 class="section-title">Empat Unit Taman Kanak-Kanak Bina Harapan</h2>
+      <p class="section-lead">Setiap unit berada di bawah naungan Yayasan Bina Kerta Utama dengan visi, misi, dan tujuan masing-masing.</p>
+    </div>
+    <div class="schools-grid">
+      <article class="school">
+        <span class="tag">Didirikan 1979</span>
+        <h3>TK Bina Harapan I</h3>
+        <p class="meta"><b>Alamat:</b> Jalan DDN Raya II No. 3, Jl. TK Bina Harapan 1 – Pondok Labu, Jakarta Selatan 12450<br><b>Kepala Sekolah:</b> Yulies Setiyani Sri H &nbsp;·&nbsp; <b>Guru:</b> Munani, Rahma Diva Ayuda</p>
+        <p class="visi">“Cerdas, Kreatif, Berakhlak Mulia”</p>
+        <ul>
+          <li>Mengembangkan potensi kecerdasan spiritual anak melalui stimulasi alat-alat permainan yang memudahkan pemahaman anak tentang nilai-nilai agama.</li>
+          <li>Mengembangkan seluruh potensi anak secara optimal melalui kegiatan bermain dengan alat-alat permainan yang bersifat edukatif, kreatif, dan inspiratif.</li>
+          <li>Meningkatkan kerjasama dengan seluruh warga TK dan masyarakat.</li>
+        </ul>
+      </article>
+      <article class="school">
+        <span class="tag">Didirikan 1980</span>
+        <h3>TK Bina Harapan II</h3>
+        <p class="meta"><b>Alamat:</b> Jalan Agathis Raya Blok C No. 90, RT003/RW010, Kel. Duren Jawa, Kec. Bekasi Timur, Kota Bekasi – Jawa Barat 17111<br><b>Kepala Sekolah:</b> Yudhiawati Sutarya, S.Pd &nbsp;·&nbsp; <b>Guru:</b> Yuli Astuti, SE dan Tutik Hartini</p>
+        <p class="visi">Membentuk generasi Cerdas, Aktif, Berakhlak Mulia dan Taqwa kepada Tuhan Yang Maha Esa.</p>
+        <ul>
+          <li>Menanamkan aqidah dan akhlak pada anak sesuai dengan nilai-nilai agama.</li>
+          <li>Memberikan pengasuhan dan layanan pendidikan anak usia dini melalui pembelajaran aktif dan menyenangkan.</li>
+          <li>Mengembangkan kecerdasan intelektual, spiritual, emosional dan sosial anak untuk siap memasuki pendidikan dasar.</li>
+          <li>Melatih anak agar terbiasa bertanggung jawab, kreatif, inovatif dan produktif; menumbuhkan rasa cinta dan peduli terhadap lingkungan.</li>
+          <li><b>Ekstrakurikuler:</b> Menari, Angklung, Renang, Metode Iqro, Bahasa Inggris.</li>
+        </ul>
+      </article>
+      <article class="school">
+        <span class="tag">Didirikan 2000</span>
+        <h3>TK Bina Harapan III</h3>
+        <p class="meta"><b>Alamat:</b> Jalan Achmad Family RT 02/RW06 No. 98, Cinere – Depok, Jawa Barat 16512<br><b>Kepala Sekolah:</b> Maryati Achmad, S.Psi, M.Pd &nbsp;·&nbsp; <b>Guru:</b> Nuryanih, Marwanih, Siti Murtamah, Sekar</p>
+        <p class="visi">Membimbing anak untuk mengembangkan kecerdasan intelektual, emosional dan spiritualnya, sehingga menjadi anak yang berbudi pekerti luhur, cerdas, kreatif, terampil dan berakhlak.</p>
+        <ul>
+          <li>Mengenalkan konsep-konsep dasar ilmu pengetahuan.</li>
+          <li>Memberikan konsep dasar hidup bersosial sesuai dengan kaidah yang ada dalam masyarakat.</li>
+          <li>Memfasilitasi dan merangsang untuk mengembangkan bakat dan minat anak didik.</li>
+        </ul>
+      </article>
+      <article class="school">
+        <span class="tag">Didirikan 2003</span>
+        <h3>TK Bina Harapan IV</h3>
+        <p class="meta"><b>Alamat:</b> Jalan Villa Santika Grogol – Depok, Jawa Barat 16512<br><b>Kepala Sekolah:</b> Yeti Herawati, S.Pd.I &nbsp;·&nbsp; <b>Guru:</b> Ashriyaningsih, Fitri Ningsih, Syarifah Azzahra</p>
+        <p class="visi">Mampu mewujudkan generasi yang berperilaku sopan, cerdas, terampil, mandiri dan berakhlak.</p>
+        <ul>
+          <li>Menciptakan sistem pembelajaran kondusif.</li>
+          <li>Meningkatkan sumber daya manusia yang kreatif.</li>
+          <li>Mewujudkan generasi yang jujur, senang belajar, mandiri, dan berakhlak; menjadikan generasi yang mampu berpikir, berkomunikasi, bertindak produktif dan inovatif.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NILAI-NILAI ================= -->
+<section class="values-sec" id="nilai">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Nilai-Nilai</span>
+      <h2 class="section-title">Empat Nilai yang Kami Junjung</h2>
+      <p class="section-lead">Dengan menjunjung tinggi nilai-nilai integritas, kreativitas, karakter, dan akhlak mulia, Yayasan Bina Kerta Utama berkomitmen mencetak generasi yang tidak hanya cerdas secara akademis, tetapi juga memiliki moralitas dan etika yang tinggi, siap berkontribusi positif dalam masyarakat.</p>
+    </div>
+    <div class="values">
+      <div class="value">
+        <div class="ico">🛡️</div>
+        <h3>Integritas</h3>
+        <p>Integritas adalah dasar dari kejujuran dan ketulusan dalam bertindak — menjunjung tinggi moralitas dan etika dalam setiap aspek kehidupan.</p>
+        <ul>
+          <li><b>Kejujuran:</b> selalu berbicara dan bertindak jujur, baik dalam konteks akademis maupun sosial.</li>
+          <li><b>Keterbukaan:</b> berani menyampaikan pendapat dan menerima masukan dengan hati terbuka.</li>
+          <li><b>Tanggung Jawab:</b> memenuhi janji dan kewajiban dengan penuh tanggung jawab.</li>
+        </ul>
+      </div>
+      <div class="value">
+        <div class="ico">💡</div>
+        <h3>Kreatif</h3>
+        <p>Kreativitas adalah kemampuan untuk berpikir di luar kotak dan menghasilkan ide-ide baru yang inovatif.</p>
+        <ul>
+          <li><b>Inovasi:</b> selalu mencari cara baru dan lebih baik dalam menyelesaikan masalah dan mengembangkan diri.</li>
+          <li><b>Kebebasan Berpikir:</b> mendorong kebebasan berekspresi dan berkreasi dalam berbagai bidang.</li>
+          <li><b>Pemecahan Masalah:</b> menggunakan pendekatan kreatif untuk mencari solusi yang efektif.</li>
+        </ul>
+      </div>
+      <div class="value">
+        <div class="ico">⭐</div>
+        <h3>Berkarakter</h3>
+        <p>Berkarakter mencakup serangkaian nilai yang membentuk kepribadian yang kuat dan positif.</p>
+        <ul>
+          <li><b>Kepercayaan Diri:</b> membangun rasa percaya diri yang kuat melalui pencapaian dan penghargaan.</li>
+          <li><b>Ketahanan:</b> tetap tegar dan gigih dalam menghadapi tantangan dan kegagalan.</li>
+          <li><b>Kepemimpinan:</b> mengembangkan kemampuan kepemimpinan, baik dalam lingkup kecil maupun besar.</li>
+        </ul>
+      </div>
+      <div class="value">
+        <div class="ico">🤝</div>
+        <h3>Berakhlak Mulia</h3>
+        <p>Berakhlak mulia adalah fondasi dari perilaku yang baik dan moralitas yang tinggi.</p>
+        <ul>
+          <li><b>Empati:</b> memahami dan merasakan perasaan orang lain.</li>
+          <li><b>Kebaikan:</b> selalu berbuat baik dan membantu sesama.</li>
+          <li><b>Hormat:</b> menghargai orang tua, guru, dan teman sebaya dalam setiap interaksi.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROGRAM PENDIDIKAN & SOSIAL ================= -->
+<section id="program">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Pendidikan &amp; Sosial</span>
+      <h2 class="section-title">Program Kerja Yayasan</h2>
+      <p class="section-lead">Selain penyelenggaraan pendidikan tingkat taman kanak-kanak, yayasan juga menjalankan program sosial berupa pelatihan, kegiatan amal, dan layanan bantuan hukum bagi masyarakat.</p>
+    </div>
+    <div class="prog-grid">
+      <article class="prog">
+        <p class="sub">Pendidikan</p>
+        <h3>Program Tahunan</h3>
+        <p class="desc">Kegiatan rutin yang dilaksanakan setiap tahun ajaran untuk mendukung perkembangan anak secara holistik.</p>
+        <div class="chips">
+          <span class="chip">School Orientation</span><span class="chip">Swimming</span><span class="chip">Visit Zoo</span>
+          <span class="chip">Independence Day</span><span class="chip">Kartini’s Day</span><span class="chip">Manasik Haji</span>
+          <span class="chip">Field Trip</span><span class="chip">Mother’s Day</span><span class="chip">Outing Class</span>
+          <span class="chip">Cooking Day</span><span class="chip">Art Performance</span><span class="chip">Nature Day</span>
+          <span class="chip">Internal Assembly</span><span class="chip">Immunization</span><span class="chip">Porseni (children competition in Ancol)</span>
+        </div>
+      </article>
+      <article class="prog">
+        <p class="sub">Pendidikan</p>
+        <h3>Quality Control Pembelajaran</h3>
+        <p class="desc">Sistem penjaminan mutu pengajaran yang dijalankan secara bersiklus oleh pihak internal dan bagian kurikulum.</p>
+        <ul class="plain">
+          <li><b>RPP</b> — Guru wajib membuat rencana pembelajaran sebelum mengajar; strategi mengajar disesuaikan dengan hasil kurikulum yang berlaku.</li>
+          <li><b>Konsultasi</b> — Rencana pembelajaran dikonsultasikan terlebih dahulu kepada pihak internal dan kurikulum, sebelum pembelajaran berlangsung.</li>
+          <li><b>Observasi</b> — Lesson plan yang sudah digunakan dalam pembelajaran diobservasi pelaksanaannya oleh pihak internal dan bagian kurikulum.</li>
+          <li><b>Feedback</b> — Memberikan masukan, saran, dan rekomendasi untuk meningkatkan kinerja serta kualitas guru dalam mengajar.</li>
+        </ul>
+      </article>
+      <article class="prog">
+        <p class="sub">Sosial</p>
+        <h3>Training &amp; Pelatihan</h3>
+        <p class="desc">Dirancang untuk memberikan pengetahuan dan keterampilan praktis bagi pendidik, orang tua, dan staf dalam mendukung perkembangan anak secara holistik.</p>
+        <ul class="plain">
+          <li><b>Pentingnya Pencegahan Pelecehan Seksual</b> — pendidikan &amp; kesadaran, kebijakan/prosedur pelaporan, serta pelatihan bagi guru, staf, dan orang tua.</li>
+          <li><b>Psikologi Anak &amp; Pengembangan Saraf Motorik (untuk Memori Otak)</b> — aspek mental-emosional, rangsangan motorik kasar/halus, dan metode praktis meningkatkan memori serta fungsi otak anak.</li>
+          <li><b>Kemampuan EQ dan IQ Anak</b> — strategi menyeimbangkan kecerdasan emosional dan intelektual beserta teknik evaluasi dan penilaiannya.</li>
+          <li><b>Self &amp; Reward untuk Anak</b> — manajemen diri dan sistem penghargaan yang efektif untuk memotivasi perilaku positif.</li>
+          <li><b>Penguatan Karakter Anak Berbasis Social Awareness</b> — meningkatkan karakter religious dan kepedulian sosial bagi anak usia dini.</li>
+        </ul>
+      </article>
+      <article class="prog">
+        <p class="sub">Sosial</p>
+        <h3>Charity (Kegiatan Amal)</h3>
+        <p class="desc">Bantuan dan dukungan kepada masyarakat yang membutuhkan untuk meningkatkan kesejahteraan sosial serta membangun solidaritas dan kepedulian antar sesama.</p>
+        <ul class="plain">
+          <li><b>Santunan Anak Yatim</b> — bantuan pendidikan (biaya sekolah, buku, perlengkapan), kegiatan sosial bersama, dan bantuan kesehatan.</li>
+          <li><b>Jumat Berkah</b> — pembagian makanan siap saji/paket makanan, sumbangan uang tunai, serta kegiatan religius (pengajian/ceramah) setiap hari Jumat.</li>
+          <li><b>Pembagian Sembako</b> — distribusi paket bahan pokok (beras, minyak goreng, gula, tepung dll.), kegiatan sosial, dan edukasi gizi seimbang.</li>
+          <li><b>Qurban</b> — pengumpulan hewan qurban (sapi, kambing, atau domba), penyembelihan dan distribusi daging qurban, serta edukasi religius setiap Hari Raya Idul Adha.</li>
+        </ul>
+      </article>
+      <article class="prog" style="grid-column:1/-1">
+        <p class="sub">Sosial</p>
+        <h3>Kantor Bantuan Hukum (KBH)</h3>
+        <p class="desc">Yayasan Bina Kerta Utama berdedikasi dan berkomitmen membantu masyarakat mencapai keadilan, kesejahteraan, dan persamaan hak di mata hukum dengan menyediakan layanan hukum berkualitas dan profesional berupa layanan litigasi, non-litigasi, dan alternatif penyelesaian sengketa (arbitrase, negosiasi, dan mediasi). <b>Visi:</b> membantu masyarakat untuk mencapai keadilan, kesejahteraan, dan persamaan di mata hukum melalui bantuan hukum yang profesional, inklusif dan terpercaya. <b>Misi:</b> menyadarkan masyarakat akan prinsip “Justitiae Non Est Neganda Non Differenda” — keadilan tidak dapat disangkal ataupun ditunda; memperjuangkan keadilan dengan standar advokasi hukum yang terdepan, terpercaya dan profesional; serta menjunjung inklusivitas dan aksesibilitas tanpa membedakan suku, ras, agama, dan gender, termasuk mewujudkan keadilan bagi anak dan perempuan.</p>
+        <p class="sub" style="margin-bottom:10px">Praktek dan Layanan Hukum KBH meliputi antara lain:</p>
+        <div class="chips">
+          <span class="chip">Hukum Pidana</span><span class="chip">Hukum Perdata (Bisnis)</span><span class="chip">Hukum Perusahaan</span>
+          <span class="chip">Hukum Perbankan</span><span class="chip">Hukum Kekayaan Intelektual (Paten, Merk, Hak Cipta, Lisensi)</span>
+          <span class="chip">Hukum Keluarga Waris (Perceraian, Rujuk, Pernikahan, Waris)</span><span class="chip">Hukum Agraria</span>
+          <span class="chip">Hukum Perburuhan dan Ketenagakerjaan</span><span class="chip">Joint Venture</span>
+          <span class="chip">Pengurusan Perizinan Hukum</span><span class="chip">Kontrak-Kontrak Kerjasama/Bisnis</span>
+          <span class="chip">Alternatif Penyelesaian Sengketa &amp; Legal Opinion</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EKSTRAKURIKULER & FASILITAS ================= -->
+<section class="timeline-sec">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Pendidikan</span>
+      <h2 class="section-title">Ekstrakurikuler &amp; Fasilitas</h2>
+    </div>
+    <div class="two-col">
+      <div class="panel">
+        <h3>Kegiatan Ekstrakurikuler</h3>
+        <article>
+          <h4>Melukis</h4>
+          <p>Dirancang untuk mengembangkan kreativitas dan ekspresi artistik anak-anak: pengembangan kreativitas, keterampilan motorik halus (koordinasi tangan–mata), ekspresi diri, serta penghargaan terhadap seni dan sejarah seni.</p>
+        </article>
+        <article>
+          <h4>Tari Tradisional</h4>
+          <p>Bertujuan melestarikan budaya dan warisan lokal melalui tarian: pelestarian budaya dari berbagai daerah di Indonesia, kesehatan fisik, kedisiplinan dan kerjasama kelompok, serta membangun kepercayaan diri saat tampil di depan orang banyak.</p>
+        </article>
+        <article>
+          <h4>English</h4>
+          <p>Meningkatkan kemampuan bahasa Inggris anak melalui kegiatan yang menyenangkan dan interaktif: penguasaan berbicara, mendengarkan, membaca, dan menulis; komunikasi global; peningkatan akademis; serta kreativitas lewat drama, debat, dan permainan berbahasa Inggris.</p>
+        </article>
+        <article>
+          <h4>Ekstrakurikuler TK Bina Harapan II</h4>
+          <p>Menari · Angklung · Renang · Metode Iqro · Bahasa Inggris</p>
+        </article>
+      </div>
+      <div class="panel">
+        <h3>Fasilitas Sekolah</h3>
+        <ul class="num-list">
+          <li><span><b>Ruang Serba Guna</b> — acara sekolah (pertunjukan, pertemuan orang tua), latihan ekstrakurikuler (tari, drama), workshop &amp; pelatihan/seminar.</span></li>
+          <li><span><b>Area Bermain</b> — pengembangan motorik kasar dan halus, sosialisasi antar anak, serta menjaga kebugaran dan kesehatan fisik.</span></li>
+          <li><span><b>Ruang UKS (Usaha Kesehatan Sekolah)</b> — pertolongan pertama, pemeriksaan kesehatan rutin, dan edukasi kesehatan, kebersihan, serta nutrisi.</span></li>
+          <li><span><b>Ruang Kelas</b> — meja kursi nyaman dan pencahayaan baik, dilengkapi alat bantu belajar modern (proyektor, papan tulis interaktif), dekorasi edukatif.</span></li>
+          <li><span><b>Ruang Sholat</b> — bersih dan nyaman, dilengkapi sajadah, mukena, dan jadwal sholat untuk mengingatkan waktu ibadah.</span></li>
+          <li><span><b>Toilet</b> — kebersihan terjaga, mudah diakses siswa (termasuk toilet khusus anak-anak dan toilet difabel), perlengkapan lengkap.</span></li>
+          <li><span><b>APE (Alat Permainan Edukatif)</b> — pembelajaran interaktif, pengembangan kognitif (pemecahan masalah, logika, kreativitas), dan stimulasi sensorik.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BERITA & PRESTASI ================= -->
+<section class="news-sec" id="berita">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Berita Terkini</span>
+      <h2 class="section-title">Aneka Informasi Menarik mengenai Pendidikan, Inovasi, serta Kemajuan Terbaru di Sekolah Kami</h2>
+    </div>
+    <div class="news-grid">
+      <a class="card" href="https://yayasanbinakertautama.or.id/berita/pelatihan-psikologi-anak-dan-pengembangan-saraf-motorik-pentingnya-pendekatan-holistik/" target="_blank" rel="noopener">
+        <div class="thumb t1">Pelatihan Psikologi Anak &amp; Pengembangan Saraf Motorik</div>
+        <div class="card-body"><p class="kicker">Berita · Pendidikan Anak Usia Dini</p><h3>Pelatihan Psikologi Anak dan Pengembangan Saraf Motorik: Pentingnya Pendekatan Holistik</h3><p>Baca selengkapnya pada situs resmi Yayasan Bina Kerta Utama →</p></div>
+      </a>
+      <a class="card" href="https://yayasanbinakertautama.or.id/berita/kemampuan-eq-dan-iq-pada-anak-pentingnya-keseimbangan-dalam-perkembangan/" target="_blank" rel="noopener">
+        <div class="thumb t2">Kemampuan EQ dan IQ pada Anak</div>
+        <div class="card-body"><p class="kicker">Berita · Tumbuh Kembang Anak</p><h3>Kemampuan EQ dan IQ pada Anak: Pentingnya Keseimbangan dalam Perkembangan</h3><p>Baca selengkapnya pada situs resmi Yayasan Bina Kerta Utama →</p></div>
+      </a>
+      <a class="card" href="https://yayasanbinakertautama.or.id/berita/pelatihan-self-reward-untuk-anak-membangun-motivasi-dan-percaya-diri/" target="_blank" rel="noopener">
+        <div class="thumb t3">Pelatihan Self &amp; Reward untuk Anak</div>
+        <div class="card-body"><p class="kicker">Berita · Motivasi &amp; Percaya Diri</p><h3>Pelatihan Self &amp; Reward untuk Anak: Membangun Motivasi dan Percaya Diri</h3><p>Baca selengkapnya pada situs resmi Yayasan Bina Kerta Utama →</p></div>
+      </a>
+      <a class="card" href="https://yayasanbinakertautama.or.id/berita/penguatan-karakter-anak-berbasis-kesadaran-sosial/" target="_blank" rel="noopener">
+        <div class="thumb t4">Penguatan Karakter Anak</div>
+        <div class="card-body"><p class="kicker">Berita · Penguatan Karakter</p><h3>Penguatan Karakter Anak Berbasis Kesadaran Sosial</h3><p>Baca selengkapnya pada situs resmi Yayasan Bina Kerta Utama →</p></div>
+      </a>
+      <a class="card" href="https://yayasanbinakertautama.or.id/prestasi/juara-harapan-i-lomba-bercerita/" target="_blank" rel="noopener">
+        <div class="thumb t2">🏅 Juara Harapan I</div>
+        <div class="card-body"><p class="kicker">Prestasi Siswa</p><h3>Juara Harapan I Lomba Bercerita</h3><p>Siswa kami, Rania, berhasil meraih juara harapan pertama dalam lomba bercerita. Dengan kemampuan narasi yang luar biasa, ia berhasil menyampaikan…</p></div>
+      </a>
+      <a class="card" href="https://yayasanbinakertautama.or.id/prestasi/juara-iii-lomba-tari-tradisional/" target="_blank" rel="noopener">
+        <div class="thumb t1">🏅 Juara III</div>
+        <div class="card-body"><p class="kicker">Prestasi Siswa</p><h3>Juara III Lomba Tari Tradisional</h3><p>Tim tari dari TK Bina Harapan berhasil meraih juara ketiga dalam lomba tari tradisional tingkat kota. Dengan gerakan yang anggun…</p></div>
+      </a>
+    </div>
+    <div class="prestasi">
+      <h3>Karya dan Prestasi Siswa</h3>
+      <p>Daftar karya dan penghargaan baik sekolah maupun siswa-siswi dari Taman Kanak-kanak Bina Harapan.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONI ================= -->
+<section>
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Testimoni</span>
+      <h2 class="section-title">Apa Kata Mereka?</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi">
+        <p>Mengembangkan potensi anak didik secara spiritual, intelektual, empati dan sosial. Partisipasi orang tua dalam pelaksanaan program-program sekolah. Guru memiliki profesionalitas dalam pelaksanaan kurikulum yang berlaku.</p>
+        <div class="who"><div class="ava">SD</div><div><b>Shania Damayanti</b><span>Wali Murid</span></div></div>
+      </div>
+      <div class="testi">
+        <p>Mengembangkan potensi anak didik secara spiritual, intelektual, empati dan sosial. Partisipasi orang tua dalam pelaksanaan program-program sekolah. Guru memiliki profesionalitas dalam pelaksanaan kurikulum yang berlaku.</p>
+        <div class="who"><div class="ava">SA</div><div><b>Sisri Ayuk</b><span>Wali Murid</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALERI ================= -->
+<section class="gallery-sec" id="galeri">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Galeri</span>
+      <h2 class="section-title">Dokumentasi Kegiatan</h2>
+    </div>
+    <div class="gal">
+      <div class="g-item g1">Kartini’s Day</div>
+      <div class="g-item g2">Kegiatan Ekstrakulikuler “Angklung”</div>
+      <div class="g-item g3">Kegiatan Outdoor</div>
+      <div class="g-item g4">Kunjungan ke Pemadam Kebakaran Jakarta</div>
+      <div class="g-item g5">Manasik Haji IGTKI</div>
+      <div class="g-item g6">Mother’s Day</div>
+      <div class="g-item g7">Pentas Seni</div>
+      <div class="g-item g8">Pentas Seni (2)</div>
+    </div>
+    <p class="gal-note">Foto kegiatan asli dapat dilihat pada halaman Galeri situs resmi: yayasanbinakertautama.or.id/galeri/</p>
+  </div>
+</section>
+
+<!-- ================= PPDB ================= -->
+<section class="ppdb-sec" id="ppdb">
+  <div class="container">
+    <span class="eyebrow">PPDB</span>
+    <h2 class="section-title">Penerimaan Peserta Didik Baru</h2>
+    <p class="lead-p">Selamat datang di halaman Penerimaan Peserta Didik Baru (PPDB) Yayasan Bina Kerta Utama. Kami membuka pendaftaran untuk siswa/i baru dengan tujuan memberikan pendidikan yang berkualitas, berbasis karakter, berakhlak mulia dan berintegritas. Berikut informasi lengkap mengenai proses pendaftaran dan persyaratan.</p>
+    <div class="ppdb-grid">
+      <div class="ppdb-card">
+        <h3>Syarat Pendaftaran</h3>
+        <h4>1. Usia</h4>
+        <ul><li>Taman Kanak-Kanak (TK): Minimal 4 tahun.</li></ul>
+        <h4>2. Dokumen yang Dibutuhkan</h4>
+        <ul>
+          <li>Foto Copy Akta Kelahiran Calon Siswa/i</li>
+          <li>Foto Copy Kartu Keluarga (KK)</li>
+          <li>Foto Copy KTP Orang Tua Calon Siswa/i (masing-masing 1 lembar)</li>
+        </ul>
+        <h4>3. Formulir Pendaftaran</h4>
+        <p>Hubungi kontak kami untuk mendapatkan formulir, lalu isi lengkap beserta dokumen pendukung. Dapat dikirimkan melalui Whatsapp <a href="https://wa.me/6285212416595" style="color:var(--gold);font-weight:700">085212416595</a> atau langsung ke kantor/sekolah masing-masing dengan alamat yang tertera.</p>
+      </div>
+      <div class="ppdb-card">
+        <h3>Unit Sekolah yang Menerima Peserta Didik Baru</h3>
+        <ul>
+          <li>TK Bina Harapan I — Pondok Labu, Jakarta Selatan (berdiri 1979)</li>
+          <li>TK Bina Harapan II — Bekasi Timur, Kota Bekasi (berdiri 1980)</li>
+          <li>TK Bina Harapan III — Cinere, Depok (berdiri 2000)</li>
+          <li>TK Bina Harapan IV — Grogol, Depok (berdiri 2003)</li>
+        </ul>
+        <p style="margin-top:18px">Kami berharap dapat menyambut putra-putri Anda di Yayasan Bina Kerta Utama dan bersama-sama membangun masa depan yang cerah melalui pendidikan yang berkualitas dan berkarakter.</p>
+        <a class="btn btn-gold" style="margin-top:20px" href="https://wa.me/6285212416595?text=Halo..%20Saya%20ingin%20mendaftar%20PPDB">Daftar via WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= KONTAK ================= -->
+<section id="kontak">
+  <div class="container">
+    <div class="center">
+      <span class="eyebrow">Kontak Kami</span>
+      <h2 class="section-title">Hubungi Yayasan Bina Kerta Utama</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h3>Kantor Yayasan</h3>
+        <div class="c-row"><div class="c-ico">📍</div><div><b>Alamat</b><span>Jalan DDN Raya II No.3, Jl. TK Bina Harapan I – Pondok Labu, Jakarta Selatan, Kode Pos 12450</span></div></div>
+        <div class="c-row"><div class="c-ico">📞</div><div><b>Telepon</b><a href="tel:085212416595">085212416595</a></div></div>
+        <div class="c-row"><div class="c-ico">💬</div><div><b>WhatsApp</b><a href="https://api.whatsapp.com/send?phone=6285212416595">085212416595</a></div></div>
+        <div class="c-row"><div class="c-ico">✉️</div><div><b>Email</b><a href="mailto:yayasanbinakertautama@gmail.com">yayasanbinakertautama@gmail.com</a></div></div>
+        <div class="unit-list">
+          <div><b>TK Bina Harapan I</b> — Jalan DDN Raya II No. 3, Jl. TK Bina Harapan 1, Pondok Labu, Jakarta Selatan 12450</div>
+          <div><b>TK Bina Harapan II</b> — Jalan Agathis Raya Blok C No. 90, RT003/RW010, Kel. Duren Jawa, Kec. Bekasi Timur, Kota Bekasi, Jawa Barat 17111</div>
+          <div><b>TK Bina Harapan III</b> — Jalan Achmad Family RT 02/RW06 No. 98, Cinere, Depok, Jawa Barat 16512</div>
+          <div><b>TK Bina Harapan IV</b> — Jalan Villa Santika Grogol, Depok, Jawa Barat 16512</div>
+        </div>
+      </div>
+      <iframe class="map-frame" title="Lokasi Yayasan Bina Kerta Utama" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://maps.google.com/maps?q=Jalan%20DDN%20Raya%20II%20No.%203%2C%20Pondok%20Labu%2C%20Jakarta%20Selatan&t=&z=16&ie=UTF8&iwloc=&output=embed"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="f-brand"><span class="mark">YBU</span><b>Yayasan Bina Kerta Utama</b></div>
+        <p>Yayasan bergerak dalam bidang Pendidikan dan Sosial. Pada saat ini telah memiliki 4 cabang yang berlokasi di Jakarta, Depok, &amp; Bekasi — membantu pemerintah mewujudkan generasi bangsa yang unggul, cerdas, kreatif dan berakhlak mulia serta terus meningkatkan mutu pelayanan dalam pembelajaran, pengajar, dan fasilitas.</p>
+      </div>
+      <div>
+        <h4>Tautan Resmi</h4>
+        <nav>
+          <a href="https://yayasanbinakertautama.or.id/" target="_blank" rel="noopener">Beranda</a>
+          <a href="https://yayasanbinakertautama.or.id/tentang/profil/" target="_blank" rel="noopener">Profil</a>
+          <a href="https://yayasanbinakertautama.or.id/tentang/sejarah/" target="_blank" rel="noopener">Sejarah</a>
+          <a href="https://yayasanbinakertautama.or.id/tentang/pengurus/" target="_blank" rel="noopener">Pengurus</a>
+          <a href="https://yayasanbinakertautama.or.id/ppdb/" target="_blank" rel="noopener">PPDB</a>
+          <a href="https://yayasanbinakertautama.or.id/galeri/" target="_blank" rel="noopener">Galeri</a>
+          <a href="https://yayasanbinakertautama.or.id/kontak-kami/" target="_blank" rel="noopener">Contact Us</a>
+        </nav>
+      </div>
+      <div>
+        <h4>Kontak</h4>
+        <p>Jalan DDN Raya II No.3, Jl. TK Bina Harapan I – Pondok Labu, Jakarta Selatan, Kode Pos 12450<br>
+        Telepon / WhatsApp: 085212416595<br>Email: yayasanbinakertautama@gmail.com</p>
+      </div>
+    </div>
+    <div class="copy">
+      <span>© 2026 Yayasan Bina Kerta Utama. All Rights Reserved.</span>
+      <span>Sumber konten: yayasanbinakertautama.or.id</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/6285212416595?text=Halo.." target="_blank" rel="noopener">💬 Hubungi Kami</a>
+
+<script>
+  const burger=document.querySelector('.burger'),menu=document.getElementById('menu');
+  burger.addEventListener('click',()=>menu.classList.toggle('open'));
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+</script>
+</body>
+</html>
