@@ -200,7 +200,9 @@
   /* ===== Galeri ===== */
   .gallery-sec{background:var(--paper)}
   .gal{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px}
-  .g-item{aspect-ratio:4/3;border-radius:14px;display:flex;align-items:flex-end;padding:16px;color:#fff;font-weight:700;font-size:.9rem;min-height:120px;transition:.25s}
+  .g-item{position:relative;aspect-ratio:4/3;border-radius:14px;display:flex;align-items:flex-end;padding:16px;color:#fff;font-weight:700;font-size:.9rem;min-height:120px;transition:.25s;overflow:hidden;background-size:cover;background-position:center}
+  .g-item::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(15,45,74,.78) 0%,rgba(15,45,74,.15) 55%,transparent 100%)}
+  .g-item span{position:relative;z-index:1;text-shadow:0 1px 6px rgba(0,0,0,.5)}
   .g-item:hover{transform:scale(1.02)}
   .g1{background:linear-gradient(160deg,#8e3b6b,#c96ba0)}
   .g2{background:linear-gradient(160deg,#0e7c7b,#3fbfa2)}
@@ -210,6 +212,7 @@
   .g6{background:linear-gradient(160deg,#7a5c1e,#d8b45a)}
   .g7{background:linear-gradient(160deg,#4d3b8e,#8f7ad1)}
   .g8{background:linear-gradient(160deg,#1e6b46,#54b57f)}
+  .g9{background:linear-gradient(160deg,#8a2f4d,#d98aa5)}
   .gal-note{margin-top:18px;font-size:.85rem;color:var(--muted);font-style:italic}
 
   /* ===== PPDB ===== */
@@ -704,14 +707,15 @@
       <h2 class="section-title">Dokumentasi Kegiatan</h2>
     </div>
     <div class="gal">
-      <div class="g-item g1">Kartini’s Day</div>
-      <div class="g-item g2">Kegiatan Ekstrakulikuler “Angklung”</div>
-      <div class="g-item g3">Kegiatan Outdoor</div>
-      <div class="g-item g4">Kunjungan ke Pemadam Kebakaran Jakarta</div>
-      <div class="g-item g5">Manasik Haji IGTKI</div>
-      <div class="g-item g6">Mother’s Day</div>
-      <div class="g-item g7">Pentas Seni</div>
-      <div class="g-item g8">Pentas Seni (2)</div>
+      <div class="g-item g1" style="background-image:url('https://images.unsplash.com/photo-1596461404969-0ae8c345270e?auto=format&fit=crop&w=800&q=70'),linear-gradient(160deg,#8e3b6b,#c96ba0)"><span>Kartini’s Day</span></div>
+      <div class="g-item g2" style="background-image:url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d6?auto=format&fit=crop&w=800&q=70'),linear-gradient(160deg,#0e7c7b,#3fbfa2)"><span>Kegiatan Ekstrakulikuler “Angklung”</span></div>
+      <div class="g-item g3" style="background-image:url('https://images.unsplash.com/photo-1470240731273-7821ab6b7dcc?auto=format&fit=crop&w=800&q=70'),linear-gradient(160deg,#2a6fa8,#6fb1e0)"><span>Kegiatan Outdoor</span></div>
+      <div class="g-item g4" style="background-image:url('https://images.unsplash.com/photo-1582268611958-8fdcc82dfcd7?auto=format&fit=crop&w=800&q=70'),linear-gradient(160deg,#b3541e,#e0913c)"><span>Kunjungan ke Pemadam Kebakaran Jakarta</span></div>
+      <div class="g-item g5" style="background-image:url('https://images.unsplash.com/photo-159168190323f-4ba6a2440369?auto=format&fit=crop&w=800&q=70'),linear-gradient(160deg,#0f2d4a,#3f7ca8)"><span>Manasik Haji IGTKI</span></div>
+      <div class="g-item g6" style="background-image:url('https://images.unsplash.com/photo-1519340241570-473f6d304940?auto=format&fit=crop&w=800&q=70'),linear-gradient(160deg,#7a5c1e,#d8b45a)"><span>Mother’s Day</span></div>
+      <div class="g-item g7" style="background-image:url('https://images.unsplash.com/photo-1508700115892-445f0d485675?auto=format&fit=crop&w=800&q=70'),linear-gradient(160deg,#4d3b8e,#8f7ad1)"><span>Pentas Seni Tari dan Seni Bela Diri</span></div>
+      <div class="g-item g8" style="background-image:url('https://images.unsplash.com/photo-1547153760-18fce8d010b6?auto=format&fit=crop&w=800&q=70'),linear-gradient(160deg,#1e6b46,#54b57f)"><span>Pentas Seni Tari dan Seni Bela Diri (2)</span></div>
+      <div class="g-item g9" style="background-image:url('https://images.unsplash.com/photo-1609587312208-cea0b87fcd73?auto=format&fit=crop&w=800&q=70'),linear-gradient(160deg,#8a2f4d,#d98aa5)"><span>Pengajian Anak-Anak</span></div>
     </div>
     <p class="gal-note">Foto kegiatan asli dapat dilihat pada halaman Galeri situs resmi: yayasanbinakertautama.or.id/galeri/</p>
   </div>
